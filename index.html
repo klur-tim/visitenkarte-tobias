@@ -58,6 +58,10 @@ svg{display:block}
 .flip.is-flipped .flip-inner{transform:rotateY(180deg)}
 .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden}
 .front{background:var(--photo)}
+/* iOS-Safari zeigt eigene Ebenen (Video, weißes Band) trotz backface-visibility durch.
+   Deshalb blendet jede Seite genau dann aus, wenn sie beim Drehen hochkant steht (ca. 0,13 s). */
+.front,.back{transition:opacity .05s linear .07s}
+.flip.is-flipped .front,.flip:not(.is-flipped) .back{opacity:0; pointer-events:none}
 .front img,.front video{width:100%; height:100%; object-fit:cover; object-position:50% 8%; display:block}
 .front::after{ /* 45°-Band unten links wie auf der Website */
   content:""; position:absolute; left:0; right:0; bottom:-1px; height:64px; background:var(--card);
@@ -211,7 +215,7 @@ footer nav a:hover{color:var(--berry)}
 .toast.show{opacity:1; transform:translate(-50%,0)}
 
 @media (max-width:360px){ h1{font-size:30px} .back blockquote{font-size:23px; margin:10px 0 12px} .back p{font-size:14px} .body{padding-left:18px;padding-right:18px} }
-@media (prefers-reduced-motion:reduce){ .flip-inner,.overlay,.sheet,.toast{transition:none} }
+@media (prefers-reduced-motion:reduce){ .flip-inner,.front,.back,.overlay,.sheet,.toast{transition:none} }
 </style>
 </head>
 <body>
