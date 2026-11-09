@@ -1,0 +1,6 @@
+# Lokal bleiben: Originalfoto, Rohclips, Testvarianten
+quelle/
+motion/
+varianten.html
+.DS_Store
+__pycache__/
